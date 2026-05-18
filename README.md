@@ -1,36 +1,72 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Havana Pool & Wellness (Merlynn Park Hotel Jakarta)
 
-## Getting Started
+Luxury resort-style booking website built with Next.js (App Router), TypeScript, Tailwind, shadcn/ui, Supabase, and Framer Motion.
 
-First, run the development server:
+## Tech Stack
+
+- Next.js 14 (App Router) + TypeScript
+- Tailwind CSS + shadcn/ui
+- Supabase (Postgres + RLS)
+- React Hook Form + Zod
+- Framer Motion
+
+## Routes
+
+- `/` — Single-page home (hero, facilities, story, gallery, CTA)
+- `/pool`, `/spa`, `/gym`, `/bbq` — Facility pages
+- `/booking` — Multi-step booking form + summary sidebar
+- `/booking/confirmation?code=...` — Confirmation page that loads booking details
+- `POST /api/bookings` — Creates a booking and returns `{ bookingCode }`
+
+## Setup
+
+### 1) Install dependencies
+
+```bash
+npm install
+```
+
+### 2) Configure environment variables
+
+Copy the example file:
+
+```bash
+copy .env.example .env.local
+```
+
+Set:
+
+- `NEXT_PUBLIC_SUPABASE_URL`
+- `NEXT_PUBLIC_SUPABASE_ANON_KEY`
+
+Optional:
+
+- `NEXT_PUBLIC_SITE_URL` (defaults to `http://localhost:3000`)
+
+### 3) Create Supabase tables + seed data
+
+Run the SQL in [supabase/schema.sql](supabase/schema.sql) in your Supabase project (SQL Editor). This creates:
+
+- `facilities`, `time_slots`, `promotions`, `bookings`
+- Seed data for the 4 facilities + time slots + an active popup promotion
+- RLS policies that allow public read/write as required for this demo
+
+## Development
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open `http://localhost:3000`.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Production Build
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+npm run build
+npm run start
+```
 
-## Learn More
+## Notes
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- The booking form validates input client-side (RHF + Zod) and submits to `POST /api/bookings`.
+- Promo codes can be entered in the summary sidebar; the server validates and applies discounts when creating the booking.
