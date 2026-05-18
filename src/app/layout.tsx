@@ -19,6 +19,9 @@ const bodyFont = DM_Sans({
 export const metadata: Metadata = {
   title: "Havana Pool & Wellness — Merlynn Park Hotel Jakarta",
   description: "7th Floor facilities booking — Pool, Spa, Gym, BBQ Terrace.",
+  icons: {
+    icon: "/icon.png",
+  },
 };
 
 export default function RootLayout({

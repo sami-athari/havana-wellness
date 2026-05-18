@@ -8,12 +8,11 @@ import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
-const navLinks = [
-  { href: "/", label: "Home" },
+const navLinks = [  { href: "/", label: "Home" },
   { href: "/pool", label: "Pool" },
   { href: "/spa", label: "Spa" },
   { href: "/gym", label: "Gym" },
-  { href: "/bbq", label: "BBQ Terrace" },
+  { href: "/bbq", label: "BBQ" },
 ];
 
 export function Navbar() {
