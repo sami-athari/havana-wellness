@@ -1,3 +1,9 @@
+-- Required extension for gen_random_uuid()
+CREATE EXTENSION IF NOT EXISTS pgcrypto;
+
+-- Ensure objects land in the public schema
+SET search_path = public;
+
 -- FACILITIES TABLE
 CREATE TABLE facilities (
   id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
@@ -24,6 +30,7 @@ CREATE TABLE bookings (
   booking_code TEXT UNIQUE NOT NULL,
   facility_id UUID REFERENCES facilities(id) ON DELETE CASCADE,
   facility_slug TEXT NOT NULL,
+  promo_code TEXT,
   guest_name TEXT NOT NULL,
   guest_email TEXT NOT NULL,
   guest_phone TEXT NOT NULL,
@@ -116,3 +123,8 @@ CREATE POLICY "Public read promotions" ON promotions FOR SELECT USING (true);
 CREATE POLICY "Public read time_slots" ON time_slots FOR SELECT USING (true);
 CREATE POLICY "Public insert bookings" ON bookings FOR INSERT WITH CHECK (true);
 CREATE POLICY "Public read own booking" ON bookings FOR SELECT USING (true);
+
+-- Required privileges for Supabase PostgREST (anon/authenticated)
+GRANT USAGE ON SCHEMA public TO anon, authenticated;
+GRANT SELECT ON facilities, promotions, time_slots TO anon, authenticated;
+GRANT SELECT, INSERT ON bookings TO anon, authenticated;

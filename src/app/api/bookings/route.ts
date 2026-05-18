@@ -68,40 +68,62 @@ export async function POST(req: Request) {
 
     const bookingCode = generateBookingCodeForDateString(input.bookingDate);
 
+    const baseInsert = {
+      booking_code: bookingCode,
+      facility_id: facility?.id ?? null,
+      facility_slug: input.facilitySlug,
+      guest_name: input.guestName,
+      guest_email: input.guestEmail,
+      guest_phone: input.guestPhone,
+      room_number: input.roomNumber ?? null,
+      booking_date: input.bookingDate,
+      time_slot: input.timeSlot,
+      duration_hours: 1,
+      num_guests: input.numGuests,
+      special_requests: input.specialRequests ?? null,
+      total_price: totalPrice,
+      status: "confirmed",
+      payment_method: input.paymentMethod,
+    } as const;
+
+    // Prefer storing promo_code, but gracefully fallback if the DB doesn't have the column yet.
     const { data: inserted, error } = await supabase
       .from("bookings")
-      .insert({
-        booking_code: bookingCode,
-        facility_id: facility?.id ?? null,
-        facility_slug: input.facilitySlug,
-        promo_code: promoCode ?? null,
-        guest_name: input.guestName,
-        guest_email: input.guestEmail,
-        guest_phone: input.guestPhone,
-        room_number: input.roomNumber ?? null,
-        booking_date: input.bookingDate,
-        time_slot: input.timeSlot,
-        duration_hours: 1,
-        num_guests: input.numGuests,
-        special_requests: input.specialRequests ?? null,
-        total_price: totalPrice,
-        status: "confirmed",
-        payment_method: input.paymentMethod,
-      })
+      .insert({ ...baseInsert, promo_code: promoCode ?? null } as any)
       .select("id, booking_code")
       .single();
 
-    if (error) {
+    let finalInserted = inserted;
+    let finalError = error;
+
+    if (
+      finalError &&
+      typeof finalError.message === "string" &&
+      finalError.message.includes("promo_code")
+    ) {
+      const retry = await supabase
+        .from("bookings")
+        .insert(baseInsert as any)
+        .select("id, booking_code")
+        .single();
+      finalInserted = retry.data;
+      finalError = retry.error;
+    }
+
+    if (finalError || !finalInserted) {
       return NextResponse.json(
-        { success: false, message: error.message },
+        {
+          success: false,
+          message: finalError?.message ?? "Insert booking failed (no data returned)",
+        },
         { status: 500 }
       );
     }
 
     return NextResponse.json({
       success: true,
-      bookingCode: inserted.booking_code,
-      bookingId: inserted.id,
+      bookingCode: finalInserted.booking_code,
+      bookingId: finalInserted.id,
     });
   } catch (e) {
     if (e instanceof z.ZodError) {

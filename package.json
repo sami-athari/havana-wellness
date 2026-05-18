@@ -6,7 +6,9 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "smoke:supabase": "node scripts/supabase-smoke-test.cjs",
+    "smoke:booking": "node scripts/booking-e2e-smoke.cjs"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.2.2",
