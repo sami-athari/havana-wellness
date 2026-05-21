@@ -1,4 +1,12 @@
 @import "tailwindcss";
+@theme {
+  --color-gold: #C9A84C;
+  --color-gold-hover: #B8952F;
+  --color-gold-light: #E8D49A;
+
+  --font-display: "Cormorant Garamond", Georgia, serif;
+  --font-body: "DM Sans", system-ui, sans-serif;
+}
 @import "tw-animate-css";
 @import "shadcn/tailwind.css";
 
