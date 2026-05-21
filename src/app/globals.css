@@ -49,53 +49,47 @@
 }
 
 :root {
-  /* Core palette — Dark Luxury Resort */
-  --havana-black: #0A0A0A;
-  --havana-charcoal: #1A1A1A;
-  --havana-dark: #111827;
-  --havana-surface: #1F2937;
-  --havana-gold: #C9A84C;
-  --havana-gold-light: #E2C97E;
-  --havana-gold-dark: #9A7A2E;
-  --havana-cream: #F5F0E8;
-  --havana-ivory: #FAF7F2;
-  --havana-white: #FFFFFF;
-  --havana-teal: #2DD4BF;
-  --havana-pool-blue: #0EA5E9;
-  --havana-spa-rose: #F43F5E;
-  --havana-gym-orange: #F97316;
-  --havana-bbq-amber: #D97706;
+  --color-bg: #ffffff;
+  --color-bg-soft: #f8f7f4;
+  --color-bg-card: #ffffff;
+  --color-surface: #f2f0ec;
+  --color-text-primary: #111111;
+  --color-text-secondary: #555555;
+  --color-text-muted: #999999;
+  --color-text-white: #ffffff;
+  --color-gold: #c9a84c;
+  --color-gold-hover: #b8952f;
+  --color-gold-light: #e8d49a;
+  --color-border: #e5e2dc;
+  --color-border-dark: #cccccc;
+  --color-pool: #0ea5e9;
+  --color-spa: #f43f5e;
+  --color-gym: #f97316;
+  --color-bbq: #d97706;
 
-  /* Typography */
   --font-display: 'Cormorant Garamond', Georgia, serif;
   --font-body: 'DM Sans', system-ui, sans-serif;
 
-  /* Spacing & Radius */
-  --radius-sm: 4px;
-  --radius-md: 8px;
-  --radius-lg: 16px;
-  --radius-full: 9999px;
-
-  /* shadcn theme vars (mapped to Havana palette) */
-  --background: var(--havana-black);
-  --foreground: var(--havana-cream);
-  --card: var(--havana-surface);
-  --card-foreground: var(--havana-cream);
-  --popover: var(--havana-surface);
-  --popover-foreground: var(--havana-cream);
-  --primary: var(--havana-gold);
-  --primary-foreground: var(--havana-black);
-  --secondary: var(--havana-charcoal);
-  --secondary-foreground: var(--havana-cream);
-  --muted: rgba(255, 255, 255, 0.08);
-  --muted-foreground: rgba(245, 240, 232, 0.72);
-  --accent: rgba(201, 168, 76, 0.12);
-  --accent-foreground: var(--havana-cream);
-  --destructive: #ef4444;
-  --border: rgba(255, 255, 255, 0.10);
-  --input: rgba(255, 255, 255, 0.12);
-  --ring: rgba(201, 168, 76, 0.45);
   --radius: 1rem;
+
+  --background: var(--color-bg);
+  --foreground: var(--color-text-primary);
+  --card: var(--color-bg-card);
+  --card-foreground: var(--color-text-primary);
+  --popover: var(--color-bg-card);
+  --popover-foreground: var(--color-text-primary);
+  --primary: var(--color-gold);
+  --primary-foreground: var(--color-text-white);
+  --secondary: var(--color-surface);
+  --secondary-foreground: var(--color-text-primary);
+  --muted: var(--color-bg-soft);
+  --muted-foreground: var(--color-text-muted);
+  --accent: color-mix(in srgb, var(--color-gold) 14%, white);
+  --accent-foreground: var(--color-text-primary);
+  --destructive: #ef4444;
+  --border: var(--color-border);
+  --input: var(--color-border);
+  --ring: color-mix(in srgb, var(--color-gold) 55%, white);
 }
 
 .dark {
@@ -107,19 +101,21 @@ html {
 }
 
 body {
-  background: var(--havana-black);
-  color: var(--havana-cream);
+  background: var(--color-bg);
+  color: var(--color-text-primary);
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
 }
 
 ::selection {
-  background: rgba(201, 168, 76, 0.35);
-  color: var(--havana-ivory);
+  background: color-mix(in srgb, var(--color-gold) 35%, white);
+  color: var(--color-text-primary);
 }
 
-/* Custom scrollbar */
 * {
   scrollbar-width: thin;
-  scrollbar-color: var(--havana-gold) var(--havana-charcoal);
+  scrollbar-color: var(--color-gold) var(--color-bg-soft);
 }
 
 *::-webkit-scrollbar {
@@ -128,13 +124,13 @@ body {
 }
 
 *::-webkit-scrollbar-track {
-  background: var(--havana-charcoal);
+  background: var(--color-bg-soft);
 }
 
 *::-webkit-scrollbar-thumb {
-  background: var(--havana-gold);
+  background: var(--color-gold);
   border-radius: 9999px;
-  border: 2px solid var(--havana-charcoal);
+  border: 2px solid var(--color-bg-soft);
 }
 
 h1,
@@ -144,6 +140,9 @@ h4,
 h5,
 h6 {
   font-family: var(--font-display);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  line-height: 1.1;
 }
 
 p,
@@ -155,54 +154,6 @@ input,
 textarea,
 label {
   font-family: var(--font-body);
-}
-
-.gold-gradient {
-  background: linear-gradient(135deg, #C9A84C, #E2C97E);
-}
-
-.dark-overlay {
-  background: rgba(0, 0, 0, 0.6);
-}
-
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(16px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-}
-
-@keyframes shimmer {
-  from {
-    background-position: 0% 0%;
-  }
-  to {
-    background-position: -200% 0%;
-  }
-}
-
-@keyframes scaleIn {
-  from {
-    opacity: 0;
-    transform: scale(0.98);
-  }
-  to {
-    opacity: 1;
-    transform: scale(1);
-  }
 }
 
 @layer base {

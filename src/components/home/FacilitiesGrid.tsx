@@ -42,15 +42,15 @@ export function FacilitiesGrid() {
   return (
     <motion.section
       id="facilities"
-      className="bg-(--havana-black)"
+      className="bg-[#F8F7F4]"
       initial={{ opacity: 0, y: 40 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ duration: 0.6 }}
     >
-      <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6">
+      <div className="mx-auto max-w-7xl px-6 py-20 lg:px-10">
         <SectionTitle eyebrow="OUR FACILITIES" title="Your 7th Floor Sanctuary" />
-        <div className="mt-10 grid gap-6 lg:grid-cols-2">
+        <div className="mt-10 grid grid-cols-1 gap-6 md:grid-cols-2">
           {facilities.map((f) => (
             <FacilityCard
               key={f.slug}

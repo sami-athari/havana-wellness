@@ -26,15 +26,15 @@ export function DatePicker({
           type="button"
           variant="outline"
           className={cn(
-            "h-12 w-full justify-start border-white/15 bg-transparent text-left font-normal text-(--havana-cream)",
-            !value && "text-(--havana-cream)/50"
+            "h-12 w-full justify-start rounded-xl border-[#E5E2DC] bg-white text-left font-normal text-[#111111]",
+            !value && "text-[#999999]"
           )}
         >
-          <CalendarIcon className="mr-2 h-4 w-4 text-(--havana-gold)" />
+          <CalendarIcon className="mr-2 h-4 w-4 text-gold" />
           {value ? format(value, "PPP") : "Pick a date"}
         </Button>
       </PopoverTrigger>
-      <PopoverContent className="w-auto border-white/10 bg-(--havana-charcoal) p-0 text-(--havana-cream)">
+      <PopoverContent className="w-auto border-[#E5E2DC] bg-white p-0 text-[#111111] shadow-lg">
         <Calendar
           mode="single"
           selected={value}

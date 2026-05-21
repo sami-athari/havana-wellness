@@ -10,9 +10,11 @@ export function SectionTitle({
   className?: string;
 }) {
   return (
-    <div className={cn("text-center", className)}>
-      <div className="text-xs tracking-[0.3em] text-(--havana-gold)">{eyebrow}</div>
-      <h2 className="mt-3 font-display text-3xl text-(--havana-cream) sm:text-4xl">
+    <div className={cn("text-left", className)}>
+      <div className="inline-flex rounded-full bg-gold/10 px-4 py-2 text-[10px] tracking-widest text-gold">
+        {eyebrow}
+      </div>
+      <h2 className="mt-4 font-display text-4xl text-[#111111] sm:text-5xl">
         {title}
       </h2>
     </div>

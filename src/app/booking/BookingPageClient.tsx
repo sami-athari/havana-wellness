@@ -18,28 +18,30 @@ export default function BookingPageClient() {
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.6 }}
-      className="bg-(--havana-black)"
+      className="bg-[#F8F7F4] text-[#111111]"
     >
-      <div className="mx-auto max-w-7xl px-4 py-14 sm:px-6">
-        <div className="mb-10">
-          <div className="text-xs tracking-[0.3em] text-(--havana-gold)">BOOKING</div>
-          <h1 className="mt-3 font-display text-4xl text-(--havana-ivory) sm:text-5xl">
+      <div className="mx-auto max-w-[1200px] px-6 py-12">
+        <div className="mb-10 max-w-2xl">
+          <div className="inline-flex rounded-full bg-gold/10 px-4 py-2 text-[10px] tracking-widest text-gold">
+            BOOKING
+          </div>
+          <h1 className="mt-4 font-display text-[40px] text-[#111111] lg:text-[56px]">
             Reserve your Havana experience
           </h1>
-          <p className="mt-3 text-sm text-(--havana-cream)/75 sm:text-base">
+          <p className="mt-4 text-[16px] leading-relaxed text-[#555555]">
             Choose a facility, pick your time, and we&apos;ll confirm your reservation.
           </p>
         </div>
 
-        <div className="flex flex-col gap-8 lg:flex-row">
-          <div className="order-1 lg:order-2 lg:w-105">
+        <div className="grid grid-cols-1 gap-8 lg:grid-cols-[1.4fr_1fr]">
+          <div className="order-1 lg:order-2">
             <BookingSummary
               draft={draft}
               promoCode={promoCode}
               onPromoCodeChange={setPromoCode}
             />
           </div>
-          <div className="order-2 lg:order-1 lg:flex-1">
+          <div className="order-2 lg:order-1">
             <BookingForm
               promoCode={promoCode}
               onDraftChange={(patch) => setDraft((prev) => ({ ...prev, ...patch }))}

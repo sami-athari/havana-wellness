@@ -43,11 +43,11 @@ export function TimeSlotPicker({
   }, [facilitySlug]);
 
   if (!facilitySlug) {
-    return <div className="text-sm text-(--havana-cream)/60">Select a facility first.</div>;
+    return <div className="text-sm text-[#999999]">Select a facility first.</div>;
   }
 
   if (loading) {
-    return <div className="text-sm text-(--havana-cream)/60">Loading time slots…</div>;
+    return <div className="text-sm text-[#999999]">Loading time slots…</div>;
   }
 
   return (
@@ -62,11 +62,11 @@ export function TimeSlotPicker({
             disabled={!available}
             onClick={() => available && onChange(s.slot_time)}
             className={cn(
-              "min-h-[44px] rounded-full border px-4 py-2 text-sm",
+              "h-11 rounded-full border px-5 py-2.5 text-[13px] font-body transition-colors",
               selected
-                ? "border-(--havana-gold) bg-(--havana-gold) text-black"
-                : "border-(--havana-gold)/45 text-(--havana-cream) hover:bg-white/5",
-              !available && "opacity-40 line-through"
+                ? "border-gold bg-gold text-white"
+                : "border-[#E5E2DC] text-[#333333] hover:border-gold",
+              !available && "cursor-not-allowed bg-[#F5F5F5] text-[#CCCCCC] line-through"
             )}
           >
             {s.slot_label} · {s.slot_time}
@@ -74,7 +74,7 @@ export function TimeSlotPicker({
         );
       })}
       {slots.length === 0 ? (
-        <div className="text-sm text-(--havana-cream)/60">No time slots found.</div>
+        <div className="text-sm text-[#999999]">No time slots found.</div>
       ) : null}
     </div>
   );

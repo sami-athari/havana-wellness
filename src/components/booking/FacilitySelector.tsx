@@ -69,27 +69,26 @@ export function FacilitySelector({
             onClick={() => onChange(f.slug)}
             whileTap={{ scale: 0.99 }}
             className={cn(
-              "relative overflow-hidden rounded-2xl border text-left",
-              "min-h-45",
-              selected ? "border-(--havana-gold)" : "border-white/10"
+              "relative overflow-hidden rounded-2xl border-2 p-4 text-left transition-all",
+              selected ? "border-gold bg-gold/5" : "border-[#E5E2DC] hover:border-gold"
             )}
           >
-            <div className="absolute inset-0">
+            <div className="absolute inset-0 opacity-15">
               <Image src={f.imageUrl} alt={f.name} fill className="object-cover" sizes="(max-width: 640px) 100vw, 50vw" />
-              <div className="absolute inset-0 bg-linear-to-t from-black/85 via-black/35 to-black/15" />
+              <div className="absolute inset-0 bg-white" />
             </div>
 
             <div className="relative z-10 p-5">
               <div className="flex items-start justify-between gap-3">
-                <div className="font-display text-2xl text-(--havana-ivory)">{f.name}</div>
+                <div className="font-display text-[16px] text-[#111111]">{f.name}</div>
                 {selected ? (
-                  <span className="inline-flex items-center gap-1 rounded-full bg-(--havana-gold) px-3 py-1 text-xs font-semibold text-black">
+                  <span className="inline-flex items-center gap-1 rounded-full bg-gold px-3 py-1 text-xs font-semibold text-white">
                     <Check className="h-4 w-4" /> Selected
                   </span>
                 ) : null}
               </div>
-              <div className="mt-2 text-sm text-(--havana-cream)/75">{f.hours}</div>
-              <div className="mt-3 text-sm text-(--havana-gold)">{formatCurrency(f.price)}</div>
+              <div className="mt-2 text-[12px] text-[#999999]">{f.hours}</div>
+              <div className="mt-3 text-[14px] text-[#111111]">{formatCurrency(f.price)}</div>
             </div>
           </motion.button>
         );

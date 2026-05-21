@@ -20,9 +20,9 @@ export function FacilityCard({
   accent: string;
 }) {
   return (
-    <motion.div whileHover={{ scale: 1.02 }} className="group relative overflow-hidden rounded-2xl">
+    <motion.div whileHover={{ y: -6 }} transition={{ duration: 0.3 }} className="group relative overflow-hidden rounded-3xl">
       <Link href={href} className="block">
-        <div className="relative h-[320px] w-full sm:h-[360px]">
+        <div className="relative aspect-4/3 w-full overflow-hidden rounded-3xl">
           <motion.div whileHover={{ scale: 1.08 }} className="absolute inset-0">
             <Image
               src={imageUrl}
@@ -33,32 +33,22 @@ export function FacilityCard({
             />
           </motion.div>
 
-          <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/35 to-transparent" />
+          <div className="absolute inset-0 bg-[linear-gradient(to_top,rgba(0,0,0,0.7)_0%,transparent_60%)]" />
 
-          <div
-            className="absolute inset-0 rounded-2xl border transition-colors"
-            style={{ borderColor: "rgba(255,255,255,0.08)" }}
-          />
-          <div
-            className="absolute inset-0 rounded-2xl border opacity-0 transition-opacity group-hover:opacity-100"
-            style={{ borderColor: accent }}
-          />
+          <div className="absolute right-4 top-4 h-3 w-3 rounded-full" style={{ backgroundColor: accent }} />
 
           <div className="absolute bottom-0 left-0 right-0 p-6">
-            <div
-              className="inline-flex items-center rounded-full border px-3 py-1 text-xs tracking-wide"
-              style={{ borderColor: accent, color: "rgba(245,240,232,0.85)" }}
-            >
+            <div className="inline-flex items-center rounded-full border border-white/30 bg-white/20 px-3 py-1 text-[12px] text-white backdrop-blur-sm">
               {hours}
             </div>
-            <div className="mt-3 font-display text-2xl text-(--havana-cream) sm:text-3xl">
+            <div className="mt-3 font-display text-[32px] font-semibold text-white">
               {name}
             </div>
-            <div className="mt-2 inline-flex items-center gap-2 text-sm text-(--havana-gold)">
-              <span className={cn("transition-colors group-hover:text-(--havana-gold-light)")}>
+            <div className="mt-2 inline-flex items-center gap-2 text-sm text-white/80">
+              <span className={cn("rounded-full border border-white/30 bg-white/20 px-4 py-1.5 text-[12px] transition-colors", "group-hover:bg-white/30")}>
                 Explore
               </span>
-              <ArrowRight className="h-4 w-4" />
+              <ArrowRight className="h-4 w-4 text-white" />
             </div>
           </div>
         </div>

@@ -136,21 +136,28 @@ export function BookingForm({
   const isSubmitting = form.formState.isSubmitting;
 
   return (
-    <form onSubmit={form.handleSubmit(onSubmit)} className="rounded-2xl border border-white/10 bg-(--havana-surface) p-6">
-      <div className="text-xs tracking-[0.25em] text-(--havana-gold)">BOOKING FORM</div>
+    <form onSubmit={form.handleSubmit(onSubmit)} className="rounded-3xl border border-[#E5E2DC] bg-white p-8 shadow-sm">
+      <div className="inline-flex rounded-full bg-gold/10 px-4 py-2 text-[10px] tracking-widest text-gold">BOOKING FORM</div>
+      <h2 className="mt-4 font-display text-[32px] text-[#111111]">Complete your reservation</h2>
+      <p className="mt-2 text-[15px] text-[#555555]">Use the steps below to confirm your booking.</p>
 
-      <div className="mt-6 flex items-center gap-2 text-sm text-(--havana-cream)/70">
-        <span className={cn("rounded-full px-3 py-1", step === 1 ? "bg-(--havana-gold) text-black" : "bg-black/20")}>1</span>
-        <span className={cn(step === 1 && "text-(--havana-cream)")}>Choose Facility</span>
-        <span className="mx-1 text-(--havana-cream)/30">/</span>
-        <span className={cn("rounded-full px-3 py-1", step === 2 ? "bg-(--havana-gold) text-black" : "bg-black/20")}>2</span>
-        <span className={cn(step === 2 && "text-(--havana-cream)")}>Choose Date</span>
-        <span className="mx-1 text-(--havana-cream)/30">/</span>
-        <span className={cn("rounded-full px-3 py-1", step === 3 ? "bg-(--havana-gold) text-black" : "bg-black/20")}>3</span>
-        <span className={cn(step === 3 && "text-(--havana-cream)")}>Choose Time</span>
-        <span className="mx-1 text-(--havana-cream)/30">/</span>
-        <span className={cn("rounded-full px-3 py-1", step === 4 ? "bg-(--havana-gold) text-black" : "bg-black/20")}>4</span>
-        <span className={cn(step === 4 && "text-(--havana-cream)")}>Guest Details</span>
+      <div className="mt-6 flex flex-wrap items-center gap-2 text-[13px] text-[#555555]">
+        {[
+          [1, "Choose Facility"],
+          [2, "Choose Date"],
+          [3, "Choose Time"],
+          [4, "Guest Details"],
+        ].map(([number, label]) => (
+          <span
+            key={label as string}
+            className={cn(
+              "rounded-full px-3 py-1.5",
+              step === number ? "bg-gold text-white" : "bg-[#F2F0EC] text-[#555555]"
+            )}
+          >
+            {number}. {label}
+          </span>
+        ))}
       </div>
 
       <div className="mt-8">
@@ -163,8 +170,8 @@ export function BookingForm({
               exit={{ opacity: 0, x: -30 }}
               transition={{ duration: 0.25 }}
             >
-              <h3 className="font-display text-2xl text-(--havana-ivory)">Step 1 — Choose Facility</h3>
-              <p className="mt-2 text-sm text-(--havana-cream)/70">Select one facility for this reservation.</p>
+              <h3 className="font-display text-[24px] text-[#111111]">Step 1 — Choose Facility</h3>
+              <p className="mt-2 text-[14px] text-[#555555]">Select one facility for this reservation.</p>
 
               <div className="mt-5">
                 <FacilitySelector
@@ -172,7 +179,7 @@ export function BookingForm({
                   onChange={(slug) => form.setValue("facilitySlug", slug as any, { shouldValidate: true })}
                 />
                 {form.formState.errors.facilitySlug ? (
-                  <div className="mt-2 text-sm text-red-400">{form.formState.errors.facilitySlug.message}</div>
+                  <div className="mt-2 text-[12px] text-red-500">{form.formState.errors.facilitySlug.message}</div>
                 ) : null}
               </div>
 
@@ -180,7 +187,7 @@ export function BookingForm({
                 <button
                   type="button"
                   onClick={nextFromStep1}
-                  className="h-12 min-w-35 rounded-full bg-(--havana-gold) px-6 text-sm font-semibold text-black hover:bg-(--havana-gold-light)"
+                  className="inline-flex min-h-11 min-w-35 items-center justify-center rounded-xl bg-gold px-6 text-[14px] font-medium text-white hover:bg-gold-hover"
                 >
                   Next
                 </button>
@@ -196,17 +203,17 @@ export function BookingForm({
               exit={{ opacity: 0, x: -30 }}
               transition={{ duration: 0.25 }}
             >
-              <h3 className="font-display text-2xl text-(--havana-ivory)">Step 2 — Choose Date</h3>
-              <p className="mt-2 text-sm text-(--havana-cream)/70">Select your preferred date.</p>
+              <h3 className="font-display text-[24px] text-[#111111]">Step 2 — Choose Date</h3>
+              <p className="mt-2 text-[14px] text-[#555555]">Select your preferred date.</p>
 
               <div className="mt-5">
-                <div className="mb-2 text-sm text-(--havana-cream)">Date</div>
+                <div className="mb-2 text-[13px] font-medium text-[#333333]">Date</div>
                 <DatePicker
                   value={bookingDate}
                   onChange={(d) => form.setValue("bookingDate", d as any, { shouldValidate: true })}
                 />
                 {form.formState.errors.bookingDate ? (
-                  <div className="mt-2 text-sm text-red-400">{form.formState.errors.bookingDate.message as any}</div>
+                  <div className="mt-2 text-[12px] text-red-500">{form.formState.errors.bookingDate.message as any}</div>
                 ) : null}
               </div>
 
@@ -214,14 +221,14 @@ export function BookingForm({
                 <button
                   type="button"
                   onClick={() => setStep(1)}
-                  className="h-12 min-w-35 rounded-full border border-white/15 bg-transparent px-6 text-sm text-(--havana-cream) hover:bg-white/5"
+                  className="inline-flex min-h-11 min-w-35 items-center justify-center rounded-xl border border-[#E5E2DC] bg-white px-6 text-[14px] text-[#111111] hover:bg-[#F8F7F4]"
                 >
                   Back
                 </button>
                 <button
                   type="button"
                   onClick={nextFromStep2}
-                  className="h-12 min-w-35 rounded-full bg-(--havana-gold) px-6 text-sm font-semibold text-black hover:bg-(--havana-gold-light)"
+                  className="inline-flex min-h-11 min-w-35 items-center justify-center rounded-xl bg-gold px-6 text-[14px] font-medium text-white hover:bg-gold-hover"
                 >
                   Next
                 </button>
@@ -237,18 +244,18 @@ export function BookingForm({
               exit={{ opacity: 0, x: -30 }}
               transition={{ duration: 0.25 }}
             >
-              <h3 className="font-display text-2xl text-(--havana-ivory)">Step 3 — Choose Time Slot</h3>
-              <p className="mt-2 text-sm text-(--havana-cream)/70">Select your preferred time.</p>
+              <h3 className="font-display text-[24px] text-[#111111]">Step 3 — Choose Time Slot</h3>
+              <p className="mt-2 text-[14px] text-[#555555]">Select your preferred time.</p>
 
               <div className="mt-5">
-                <div className="mb-2 text-sm text-(--havana-cream)">Time Slot</div>
+                <div className="mb-2 text-[13px] font-medium text-[#333333]">Time Slot</div>
                 <TimeSlotPicker
                   facilitySlug={facilitySlug}
                   value={form.watch("timeSlot")}
                   onChange={(v) => form.setValue("timeSlot", v, { shouldValidate: true })}
                 />
                 {form.formState.errors.timeSlot ? (
-                  <div className="mt-2 text-sm text-red-400">{form.formState.errors.timeSlot.message}</div>
+                  <div className="mt-2 text-[12px] text-red-500">{form.formState.errors.timeSlot.message}</div>
                 ) : null}
               </div>
 
@@ -256,14 +263,14 @@ export function BookingForm({
                 <button
                   type="button"
                   onClick={() => setStep(2)}
-                  className="h-12 min-w-35 rounded-full border border-white/15 bg-transparent px-6 text-sm text-(--havana-cream) hover:bg-white/5"
+                  className="inline-flex min-h-11 min-w-35 items-center justify-center rounded-xl border border-[#E5E2DC] bg-white px-6 text-[14px] text-[#111111] hover:bg-[#F8F7F4]"
                 >
                   Back
                 </button>
                 <button
                   type="button"
                   onClick={nextFromStep3}
-                  className="h-12 min-w-35 rounded-full bg-(--havana-gold) px-6 text-sm font-semibold text-black hover:bg-(--havana-gold-light)"
+                  className="inline-flex min-h-11 min-w-35 items-center justify-center rounded-xl bg-gold px-6 text-[14px] font-medium text-white hover:bg-gold-hover"
                 >
                   Next
                 </button>
@@ -279,16 +286,16 @@ export function BookingForm({
               exit={{ opacity: 0, x: -30 }}
               transition={{ duration: 0.25 }}
             >
-              <h3 className="font-display text-2xl text-(--havana-ivory)">Step 4 — Guest Details</h3>
-              <p className="mt-2 text-sm text-(--havana-cream)/70">Tell us who the reservation is for.</p>
+              <h3 className="font-display text-[24px] text-[#111111]">Step 4 — Guest Details</h3>
+              <p className="mt-2 text-[14px] text-[#555555]">Tell us who the reservation is for.</p>
 
               <div className="mt-5 grid gap-4 sm:grid-cols-2">
                 <div className="sm:col-span-2">
-                  <label className="text-sm text-(--havana-cream)">Full Name *</label>
+                  <label className="mb-1.5 block text-[13px] font-medium text-[#333333]">Full Name *</label>
                   <div className="relative mt-2">
                     <input
                       {...form.register("guestName")}
-                      className="h-12 w-full rounded-full border border-white/15 bg-transparent px-4 pr-10 text-sm text-(--havana-cream)"
+                      className="h-12 w-full rounded-xl border border-[#E5E2DC] bg-white px-4 pr-10 text-[14px] text-[#111111] placeholder:text-[#999999] focus:border-gold focus:outline-none"
                       placeholder="Your full name"
                     />
                     <div className="absolute right-4 top-1/2 -translate-y-1/2">
@@ -296,16 +303,16 @@ export function BookingForm({
                     </div>
                   </div>
                   {form.formState.errors.guestName ? (
-                    <div className="mt-2 text-sm text-red-400">{form.formState.errors.guestName.message}</div>
+                    <div className="mt-2 text-[12px] text-red-500">{form.formState.errors.guestName.message}</div>
                   ) : null}
                 </div>
 
                 <div>
-                  <label className="text-sm text-(--havana-cream)">Email *</label>
+                  <label className="mb-1.5 block text-[13px] font-medium text-[#333333]">Email *</label>
                   <div className="relative mt-2">
                     <input
                       {...form.register("guestEmail")}
-                      className="h-12 w-full rounded-full border border-white/15 bg-transparent px-4 pr-10 text-sm text-(--havana-cream)"
+                      className="h-12 w-full rounded-xl border border-[#E5E2DC] bg-white px-4 pr-10 text-[14px] text-[#111111] placeholder:text-[#999999] focus:border-gold focus:outline-none"
                       placeholder="name@email.com"
                     />
                     <div className="absolute right-4 top-1/2 -translate-y-1/2">
@@ -313,16 +320,16 @@ export function BookingForm({
                     </div>
                   </div>
                   {form.formState.errors.guestEmail ? (
-                    <div className="mt-2 text-sm text-red-400">{form.formState.errors.guestEmail.message}</div>
+                    <div className="mt-2 text-[12px] text-red-500">{form.formState.errors.guestEmail.message}</div>
                   ) : null}
                 </div>
 
                 <div>
-                  <label className="text-sm text-(--havana-cream)">Phone *</label>
+                  <label className="mb-1.5 block text-[13px] font-medium text-[#333333]">Phone *</label>
                   <div className="relative mt-2">
                     <input
                       {...form.register("guestPhone")}
-                      className="h-12 w-full rounded-full border border-white/15 bg-transparent px-4 pr-10 text-sm text-(--havana-cream)"
+                      className="h-12 w-full rounded-xl border border-[#E5E2DC] bg-white px-4 pr-10 text-[14px] text-[#111111] placeholder:text-[#999999] focus:border-gold focus:outline-none"
                       placeholder="08xx or +628xx"
                     />
                     <div className="absolute right-4 top-1/2 -translate-y-1/2">
@@ -330,50 +337,50 @@ export function BookingForm({
                     </div>
                   </div>
                   {form.formState.errors.guestPhone ? (
-                    <div className="mt-2 text-sm text-red-400">{form.formState.errors.guestPhone.message}</div>
+                    <div className="mt-2 text-[12px] text-red-500">{form.formState.errors.guestPhone.message}</div>
                   ) : null}
                 </div>
 
                 <div>
-                  <label className="text-sm text-(--havana-cream)">Room Number</label>
+                  <label className="mb-1.5 block text-[13px] font-medium text-[#333333]">Room Number</label>
                   <input
                     {...form.register("roomNumber")}
-                    className="mt-2 h-12 w-full rounded-full border border-white/15 bg-transparent px-4 text-sm text-(--havana-cream)"
+                    className="mt-2 h-12 w-full rounded-xl border border-[#E5E2DC] bg-white px-4 text-[14px] text-[#111111] placeholder:text-[#999999] focus:border-gold focus:outline-none"
                     placeholder="Optional"
                   />
                 </div>
 
                 <div>
-                  <label className="text-sm text-(--havana-cream)">Number of Guests *</label>
+                  <label className="mb-1.5 block text-[13px] font-medium text-[#333333]">Number of Guests *</label>
                   <input
                     type="number"
                     min={1}
                     max={8}
                     {...form.register("numGuests", { valueAsNumber: true })}
-                    className="mt-2 h-12 w-full rounded-full border border-white/15 bg-transparent px-4 text-sm text-(--havana-cream)"
+                    className="mt-2 h-12 w-full rounded-xl border border-[#E5E2DC] bg-white px-4 text-[14px] text-[#111111] focus:border-gold focus:outline-none"
                   />
                   {form.formState.errors.numGuests ? (
-                    <div className="mt-2 text-sm text-red-400">{form.formState.errors.numGuests.message as any}</div>
+                    <div className="mt-2 text-[12px] text-red-500">{form.formState.errors.numGuests.message as any}</div>
                   ) : null}
                 </div>
 
                 <div className="sm:col-span-2">
-                  <label className="text-sm text-(--havana-cream)">Special Requests</label>
+                  <label className="mb-1.5 block text-[13px] font-medium text-[#333333]">Special Requests</label>
                   <textarea
                     {...form.register("specialRequests")}
-                    className="mt-2 min-h-27.5 w-full rounded-2xl border border-white/15 bg-transparent px-4 py-3 text-sm text-(--havana-cream)"
+                    className="mt-2 min-h-28 w-full rounded-2xl border border-[#E5E2DC] bg-white px-4 py-3 text-[14px] text-[#111111] placeholder:text-[#999999] focus:border-gold focus:outline-none"
                     placeholder="Optional"
                   />
                 </div>
 
                 <div className="sm:col-span-2">
-                  <label className="text-sm text-(--havana-cream)">Payment Method</label>
+                  <label className="mb-1.5 block text-[13px] font-medium text-[#333333]">Payment Method</label>
                   <div className="mt-3 grid gap-3 sm:grid-cols-2">
-                    <label className="flex min-h-11 cursor-pointer items-center gap-3 rounded-2xl border border-white/15 bg-black/10 px-4 py-3 text-sm">
+                    <label className="flex min-h-11 cursor-pointer items-center gap-3 rounded-2xl border border-[#E5E2DC] bg-white px-4 py-3 text-[14px] text-[#111111]">
                       <input type="radio" value="room_charge" {...form.register("paymentMethod")} />
                       <span>Charge to Room</span>
                     </label>
-                    <label className="flex min-h-11 cursor-pointer items-center gap-3 rounded-2xl border border-white/15 bg-black/10 px-4 py-3 text-sm">
+                    <label className="flex min-h-11 cursor-pointer items-center gap-3 rounded-2xl border border-[#E5E2DC] bg-white px-4 py-3 text-[14px] text-[#111111]">
                       <input type="radio" value="pay_at_venue" {...form.register("paymentMethod")} />
                       <span>Pay at Venue</span>
                     </label>
@@ -385,14 +392,14 @@ export function BookingForm({
                 <button
                   type="button"
                   onClick={() => setStep(3)}
-                  className="h-12 min-w-35 rounded-full border border-white/15 bg-transparent px-6 text-sm text-(--havana-cream) hover:bg-white/5"
+                  className="inline-flex min-h-11 min-w-35 items-center justify-center rounded-xl border border-[#E5E2DC] bg-white px-6 text-[14px] text-[#111111] hover:bg-[#F8F7F4]"
                 >
                   Back
                 </button>
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className="inline-flex h-12 min-w-55 items-center justify-center gap-2 rounded-full bg-(--havana-gold) px-6 text-sm font-semibold text-black hover:bg-(--havana-gold-light) disabled:opacity-60"
+                  className="inline-flex min-h-11 min-w-55 items-center justify-center gap-2 rounded-xl bg-gold px-6 text-[15px] font-medium text-white hover:bg-gold-hover disabled:opacity-60"
                 >
                   {isSubmitting ? (
                     <>

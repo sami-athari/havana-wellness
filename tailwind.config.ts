@@ -1,7 +1,6 @@
 import type { Config } from "tailwindcss";
 
 const config: Config = {
-  darkMode: "class",
   content: [
     "./src/pages/**/*.{ts,tsx}",
     "./src/components/**/*.{ts,tsx}",
@@ -17,56 +16,36 @@ const config: Config = {
     },
     extend: {
       fontFamily: {
-        display: ["var(--font-display)", "Georgia", "serif"],
-        body: ["var(--font-body)", "system-ui", "sans-serif"],
+        display: ["Cormorant Garamond", "Georgia", "serif"],
+        body: ["DM Sans", "system-ui", "sans-serif"],
       },
       colors: {
-        havana: {
-          black: "var(--havana-black)",
-          charcoal: "var(--havana-charcoal)",
-          dark: "var(--havana-dark)",
-          surface: "var(--havana-surface)",
-          gold: "var(--havana-gold)",
-          goldLight: "var(--havana-gold-light)",
-          goldDark: "var(--havana-gold-dark)",
-          cream: "var(--havana-cream)",
-          ivory: "var(--havana-ivory)",
-          white: "var(--havana-white)",
-          teal: "var(--havana-teal)",
-          poolBlue: "var(--havana-pool-blue)",
-          spaRose: "var(--havana-spa-rose)",
-          gymOrange: "var(--havana-gym-orange)",
-          bbqAmber: "var(--havana-bbq-amber)",
-        },
+        gold: "#C9A84C",
+        "gold-hover": "#B8952F",
+        "gold-light": "#E8D49A",
+        "havana-bg": "#F8F7F4",
+        "havana-surface": "#F2F0EC",
+        "havana-text": "#111111",
+        "havana-muted": "#999999",
+        "havana-border": "#E5E2DC",
+        pool: "#0EA5E9",
+        spa: "#F43F5E",
+        gym: "#F97316",
+        bbq: "#D97706",
       },
       keyframes: {
+        fadeUp: {
+          "0%": { opacity: "0", transform: "translateY(24px)" },
+          "100%": { opacity: "1", transform: "translateY(0)" },
+        },
         fadeIn: {
-          from: { opacity: "0" },
-          to: { opacity: "1" },
-        },
-        fadeInUp: {
-          from: { opacity: "0", transform: "translateY(16px)" },
-          to: { opacity: "1", transform: "translateY(0)" },
-        },
-        slideUp: {
-          from: { opacity: "0", transform: "translateY(24px)" },
-          to: { opacity: "1", transform: "translateY(0)" },
-        },
-        shimmer: {
-          from: { backgroundPosition: "0% 0%" },
-          to: { backgroundPosition: "-200% 0%" },
-        },
-        scaleIn: {
-          from: { opacity: "0", transform: "scale(0.98)" },
-          to: { opacity: "1", transform: "scale(1)" },
+          "0%": { opacity: "0" },
+          "100%": { opacity: "1" },
         },
       },
       animation: {
-        fadeIn: "fadeIn 0.6s ease-out both",
-        fadeInUp: "fadeInUp 0.7s ease-out both",
-        slideUp: "slideUp 0.7s ease-out both",
-        shimmer: "shimmer 1.8s linear infinite",
-        scaleIn: "scaleIn 0.5s ease-out both",
+        "fade-up": "fadeUp 0.7s ease forwards",
+        "fade-in": "fadeIn 0.5s ease forwards",
       },
     },
   },

@@ -70,9 +70,9 @@ export function BookingSummary({
 
   return (
     <aside className="lg:sticky lg:top-24">
-      <div className="rounded-2xl border border-white/10 bg-(--havana-surface) p-6">
-        <div className="text-xs tracking-[0.25em] text-(--havana-gold)">SUMMARY</div>
-        <div className="mt-4 overflow-hidden rounded-xl border border-white/10">
+      <div className="rounded-3xl border border-[#E5E2DC] bg-white p-6 shadow-sm">
+        <div className="text-[10px] tracking-widest text-gold">SUMMARY</div>
+        <div className="mt-5 overflow-hidden rounded-2xl border border-[#E5E2DC]">
           <div className="relative h-40">
             <Image
               src={metaImages[facilitySlug] ?? metaImages.pool}
@@ -81,57 +81,57 @@ export function BookingSummary({
               className="object-cover"
               sizes="420px"
             />
-            <div className="absolute inset-0 bg-black/25" />
+            <div className="absolute inset-0 bg-black/10" />
           </div>
           <div className="p-4">
-            <div className="font-display text-2xl text-(--havana-ivory)">
+            <div className="font-display text-[24px] text-[#111111]">
               {selectedFacility?.name ?? fallback?.name ?? "Select a facility"}
             </div>
-            <div className="mt-1 text-sm text-(--havana-cream)/70">
+            <div className="mt-1 text-[13px] text-[#555555]">
               {draft.bookingDate ? draft.bookingDate.toLocaleDateString("en-GB", { day: "2-digit", month: "short", year: "numeric" }) : "Choose a date"}
               {draft.timeSlot ? ` · ${draft.timeSlot}` : ""}
             </div>
           </div>
         </div>
 
-        <div className="mt-6 space-y-3 text-sm">
-          <div className="flex items-center justify-between text-(--havana-cream)/80">
+        <div className="mt-6 space-y-3 text-[14px]">
+          <div className="flex items-center justify-between text-[#555555]">
             <span>Session Price</span>
             <span>{price ? formatCurrency(price) : "—"}</span>
           </div>
-          <div className="flex items-center justify-between text-(--havana-cream)/80">
+          <div className="flex items-center justify-between text-[#555555]">
             <span>Promo Discount</span>
             <span>{discountPercent ? `-${formatCurrency(discountAmount)}` : "—"}</span>
           </div>
-          <div className="h-px bg-white/10" />
+          <div className="h-px bg-[#F0EDE8]" />
           <div className="flex items-center justify-between">
-            <span className="text-(--havana-cream)">Total</span>
-            <span className="text-lg font-semibold text-(--havana-gold)">
+            <span className="font-display text-[22px] text-[#111111]">Total</span>
+            <span className="font-display text-[22px] text-gold">
               {price ? formatCurrency(total) : "—"}
             </span>
           </div>
         </div>
 
         <div className="mt-6">
-          <div className="text-xs tracking-[0.25em] text-(--havana-gold)">PROMO CODE</div>
+          <div className="text-[10px] tracking-widest text-gold">PROMO CODE</div>
           <div className="mt-3 flex gap-2">
             <input
               value={promoCode}
               onChange={(e) => onPromoCodeChange(e.target.value)}
               placeholder="HAVANA20"
-              className="h-12 w-full rounded-full border border-white/15 bg-transparent px-4 text-sm text-(--havana-cream) placeholder:text-(--havana-cream)/40"
+              className="h-12 w-full rounded-xl border border-[#E5E2DC] bg-white px-4 text-[14px] text-[#111111] placeholder:text-[#999999] focus:border-gold focus:outline-none"
             />
             <button
               type="button"
               onClick={applyPromo}
-              className="h-12 min-w-24 rounded-full bg-(--havana-gold) px-4 text-sm font-semibold text-black hover:bg-(--havana-gold-light)"
+              className="h-12 min-w-24 rounded-xl border border-gold bg-white px-4 text-[14px] font-medium text-gold hover:bg-[#F8F7F4]"
             >
               Apply
             </button>
           </div>
         </div>
 
-        <div className="mt-6 text-xs text-(--havana-cream)/60">
+        <div className="mt-6 text-[12px] text-[#999999]">
           Terms: Full payment required at venue
         </div>
       </div>
